@@ -1,0 +1,6 @@
+Django
+django-browser-reload
+djangorestframework
+Faker
+python-decouple
+djoser
