@@ -4,15 +4,16 @@
     "cpus": 4
   },
   "waitFor": "onCreateCommand",
-  "updateContentCommand": "pip install -r requirements.txt && python manage.py migrate",
-  "postCreateCommand": "cp .env.example .env",
   "postAttachCommand": {
-    "server": "python manage.py runserver"
+    "Backend": "cd Backend && python manage.py runserver",
+    "Frontend": "cd Frontend && npm run dev"
   },
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-python.python"
+        "ms-python.python",
+        "Swellaby.node-pack",
+        "bradlc.vscode-tailwindcss"
       ]
     }
   }

@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+
+from utils.images_name import unique_name_image
 
 # Create your models here.
 
@@ -9,16 +12,28 @@ class Product(models.Model):
     price = models.IntegerField(null=False, blank=False)
     seller = models.ForeignKey('store.store', on_delete=models.CASCADE, related_name='products')
     game = models.ForeignKey('game', on_delete=models.SET_NULL, related_name='products', blank=True, null=True)
+    visitors = GenericRelation('visitors.visitor')
 
     def __str__(self) -> str:
         return self.title
     
     def get_category(self):
         return self.category.all()
+    
+    def visitor_count(self):
+        return self.visitors.count()
 
+class Image(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to=unique_name_image)
+
+    def __str__(self) -> str:
+        return self.product.title
     
 class Game(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    publisher = models.CharField(max_length=50, null=True, blank=True)
+    release_date = models.DateField(null=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
