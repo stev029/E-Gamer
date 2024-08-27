@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-plk%_n8dk4%4mf3p6-7v5qdk1r^(dn2w9-i1lzby*vti_uncco
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5173',
+]
 
 # Application definition
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'corsheaders',
     'django_browser_reload',
     'products',
     'visitors',
@@ -97,7 +100,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     "django_browser_reload.middleware.BrowserReloadMiddleware",
+    'EccomGamer.middleware.AutoSetCookieMiddleware'
 ]
 
 ROOT_URLCONF = 'EccomGamer.urls'

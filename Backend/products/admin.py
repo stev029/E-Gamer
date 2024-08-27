@@ -13,6 +13,7 @@ class TagsInline(admin.TabularInline):  # Anda juga bisa menggunakan StackedInli
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'description', 'stock', 'price', 'seller', 'game')
+    readonly_fields = ['visitor_count', 'id']
     inlines = [CategoriesInline, TagsInline]
 
 
